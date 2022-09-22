@@ -1,3 +1,9 @@
+/*
+ * Sir 16-Bit
+ * This program is for controlling the keys on a wurlitzer organ with servos.
+ * 520 tot 94 is valid range for servos
+ * 369 = max, 292 = min, 320 = straight up
+ */
 
 //https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
 #include <MIDI.h>
@@ -40,25 +46,13 @@ Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41);
 #define SER26  10
 #define SER27  11
 
-
-
-/*
- * Sir 16-Bit
- * This program is for controlling the keys on a wurlitzer organ with servos.
- * 520 tot 94 is valid range for servos
- * 369 = max, 292 = min, 320 = straight up
- */
- 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI);
-
 
 /* Calibration function
 void controlchange(byte channel, byte number, byte value){
-
   Serial.print ("Servo");  Serial.println(number); 
   Serial.println(map(value,0,127,94,520)) ;
   Serial.println(); 
-
 }
 */
 
@@ -100,17 +94,8 @@ switch(pitch){
   case 40:{ pca9685.setPWM(SER11, 0, 281);  break;  }
   case 41:{ pca9685.setPWM(SER12, 0, 288);  break;  }
   case 42:{ pca9685.setPWM(SER13, 0, 301);  break; }
-
-   
-
-
-
-
-
-  
- }
   }
-
+}
 
 void noteOff(byte channel, byte pitch, byte velocity){
   switch(pitch){
@@ -174,11 +159,11 @@ void setup() {
   digitalWrite(2, HIGH);
   delay(200);
   digitalWrite(2, LOW);
-   delay(200);
+  delay(200);
    
   MIDI.setHandleNoteOn(noteOn);
   MIDI.setHandleNoteOff(noteOff); 
-  MIDI.setHandleControlChange(controlchange);
+  //MIDI.setHandleControlChange(controlchange);
   
 }
 
