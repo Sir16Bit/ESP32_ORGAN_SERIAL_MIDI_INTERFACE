@@ -3,6 +3,10 @@
  * This program is for controlling the keys on a wurlitzer organ with servos.
  * 520 tot 94 is valid range for servos
  * 369 = max, 292 = min, 320 = straight up
+ * Choose the ESP32 Dev Module in the board manager
+ * Necesery libraries:
+ * - MIDI Library by Francois Best
+ * - 
  */
 
 //https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
@@ -56,86 +60,80 @@ void controlchange(byte channel, byte number, byte value){
 }
 */
 
-
 void noteOn(byte channel, byte pitch, byte velocity){
-   
-switch(pitch){
- 
-    
+  Serial.println(pitch);
+  switch(pitch){   
+    //Board 1
+    case 17:{pca9686.setPWM(SER16, 0, 295); break;} // F0
+    case 18:{pca9686.setPWM(SER17, 0, 275); break;} // F# 
+    case 19:{pca9686.setPWM(SER18, 0, 340); break;} // G  
+    case 20:{pca9686.setPWM(SER19, 0, 369); break;} // G# 
+    case 21:{pca9686.setPWM(SER20, 0, 369); break;} // A  
+    case 22:{pca9686.setPWM(SER21, 0, 369); break;}
+    case 23:{pca9686.setPWM(SER22, 0, 369); break;}
+    case 24:{pca9686.setPWM(SER23, 0, 369); break;}
+      
+    case 25:{pca9686.setPWM(SER24, 0, 369);  break;}
+    case 26:{pca9686.setPWM(SER25, 0, 369);  break;}
+    case 27:{pca9686.setPWM(SER26, 0, 369);  break;}
+    case 28:{pca9686.setPWM(SER27, 0, 369);  break;}
 
-  //Board 1
-  case 17:{pca9686.setPWM(SER16, 0, 295); break;  }
-  case 18:{pca9686.setPWM(SER17, 0, 295); break;  }
-  case 19:{pca9686.setPWM(SER18, 0,369); break;  }
-  case 20:{pca9686.setPWM(SER19, 0,369); break;  }
-  case 21:{pca9686.setPWM(SER20, 0, 369); break;  }
-  case 22:{pca9686.setPWM(SER21, 0, 369); break;  }
-  case 23:{pca9686.setPWM(SER22, 0, 369); break;  }
-  case 24:{pca9686.setPWM(SER23, 0, 369); break;  }
-    
-  case 25:{pca9686.setPWM(SER24, 0, 369); break;  }
-  case 26:{pca9686.setPWM(SER25, 0,369); break;  }
-  case 27:{pca9686.setPWM(SER26, 0, 369); break;  }
-  case 28:{pca9686.setPWM(SER27, 0, 369); break;  }
+    //Board 0
+    case 29:{ pca9685.setPWM(SER0, 0,369);  break;}
+    case 30:{ pca9685.setPWM(SER1, 0, 328);  break;}
+    case 31:{ pca9685.setPWM(SER2, 0, 348);  break;}
+    case 32:{ pca9685.setPWM(SER3, 0, 301);  break;}
+    case 33:{ pca9685.setPWM(SER4, 0, 358);  break;}
+    case 34:{ pca9685.setPWM(SER5, 0, 318);  break;}
 
-  //Board 0
-  case 29:{ pca9685.setPWM(SER0, 0,369);  break;  }
-  case 30:{ pca9685.setPWM(SER1, 0, 328);  break;  }
-  case 31:{ pca9685.setPWM(SER2, 0, 348);  break;  }
-  case 32:{ pca9685.setPWM(SER3, 0, 301);  break;  }
-  case 33:{ pca9685.setPWM(SER4, 0, 358);  break;  }
-  case 34:{ pca9685.setPWM(SER5, 0, 318);  break;  }
-
-  case 35:{ pca9685.setPWM(SER6, 0,325);  break;  }
-  case 36:{ pca9685.setPWM(SER7, 0, 281);  break;  }
-  case 37:{ pca9685.setPWM(SER8, 0, 352);  break;  }
-  case 38:{ pca9685.setPWM(SER9, 0, 268);  break;  }
-  case 39:{ pca9685.setPWM(SER10, 0, 285);  break;  }
-  case 40:{ pca9685.setPWM(SER11, 0, 281);  break;  }
-  case 41:{ pca9685.setPWM(SER12, 0, 288);  break;  }
-  case 42:{ pca9685.setPWM(SER13, 0, 301);  break; }
+    case 35:{ pca9685.setPWM(SER6, 0, 280);  break;} // B1
+    case 36:{ pca9685.setPWM(SER7, 0, 281);  break;} // C1
+    case 37:{ pca9685.setPWM(SER8, 0, 300);  break;} // C#
+    case 38:{ pca9685.setPWM(SER9, 0, 250);  break;} // D
+    case 39:{ pca9685.setPWM(SER10, 0, 285);  break;}
+    case 40:{ pca9685.setPWM(SER11, 0, 281);  break;}
+    case 41:{ pca9685.setPWM(SER12, 0, 288);  break;}
+    case 42:{ pca9685.setPWM(SER13, 0, 301);  break;}
   }
 }
 
 void noteOff(byte channel, byte pitch, byte velocity){
   switch(pitch){
-
     //Board 1
-    case 17:{pca9686.setPWM(SER16, 0, 369); break;  }
-    case 18:{pca9686.setPWM(SER17, 0, 369); break;  }
-    case 19:{pca9686.setPWM(SER18, 0, 295); break;  }
-    case 20:{pca9686.setPWM(SER19, 0, 295); break;  }
-    case 21:{pca9686.setPWM(SER20, 0, 295); break;  }
-    case 22:{pca9686.setPWM(SER21, 0, 295); break;  }
-    case 23:{pca9686.setPWM(SER22, 0, 295); break;  }
-    case 24:{pca9686.setPWM(SER23, 0, 295); break;  }
+    case 17:{pca9686.setPWM(SER16, 0, 369); break;} // F0 --
+    case 18:{pca9686.setPWM(SER17, 0, 369); break;} // F#
+    case 19:{pca9686.setPWM(SER18, 0, 250); break;} // G 
+    case 20:{pca9686.setPWM(SER19, 0, 295); break;} // G#
+    case 21:{pca9686.setPWM(SER20, 0, 250); break;} // A 
+    case 22:{pca9686.setPWM(SER21, 0, 295); break;} // A#
+    case 23:{pca9686.setPWM(SER22, 0, 250); break;} // B 
+    case 24:{pca9686.setPWM(SER23, 0, 250); break;} // C1 --
   
-    case 25:{pca9686.setPWM(SER24, 0, 295); break;  }
-    case 26:{pca9686.setPWM(SER25, 0, 295); break;  }
-    case 27:{pca9686.setPWM(SER26, 0, 295); break;  }
-    case 28:{pca9686.setPWM(SER27, 0, 295); break;  }
+    case 25:{pca9686.setPWM(SER24, 0, 250); break;} // C#
+    case 26:{pca9686.setPWM(SER25, 0, 250); break;} // D 
+    case 27:{pca9686.setPWM(SER26, 0, 295); break;} // D#
+    case 28:{pca9686.setPWM(SER27, 0, 250); break;} // E
    
     //Board 0
-    case 29:{ pca9685.setPWM(SER0, 0, 295);  break;  }
-    case 30:{ pca9685.setPWM(SER1, 0, 275);  break;  }
-    case 31:{ pca9685.setPWM(SER2, 0, 285);  break;  }
-    case 32:{ pca9685.setPWM(SER3, 0, 241);  break;  }
-    case 33:{ pca9685.setPWM(SER4, 0, 288);  break;  }
-    case 34:{ pca9685.setPWM(SER5, 0, 248);  break;  }
+    case 29:{ pca9685.setPWM(SER0, 0, 295);  break;} // F
+    case 30:{ pca9685.setPWM(SER1, 0, 275);  break;} // F#
+    case 31:{ pca9685.setPWM(SER2, 0, 285);  break;} // G
+    case 32:{ pca9685.setPWM(SER3, 0, 241);  break;} // G#
+    case 33:{ pca9685.setPWM(SER4, 0, 288);  break;} // A
+    case 34:{ pca9685.setPWM(SER5, 0, 248);  break;} // A#
 
-    case 35:{ pca9685.setPWM(SER6, 0, 372);  break;  }
-    case 36:{ pca9685.setPWM(SER7, 0, 358);  break;  }
-    case 37:{ pca9685.setPWM(SER8, 0, 385);  break;  }
-    case 38:{ pca9685.setPWM(SER9, 0, 335);  break;  }
-    case 39:{ pca9685.setPWM(SER10, 0, 328);  break;  }
-    case 40:{ pca9685.setPWM(SER11, 0, 352);  break;  }
-    case 41:{ pca9685.setPWM(SER12, 0, 335);  break;  }
-    case 42:{ pca9685.setPWM(SER13, 0, 342); break; }               
+    case 35:{ pca9685.setPWM(SER6, 0, 372);  break;} // B
+    case 36:{ pca9685.setPWM(SER7, 0, 358);  break;} // C2 --
+    case 37:{ pca9685.setPWM(SER8, 0, 385);  break;} // C#
+    case 38:{ pca9685.setPWM(SER9, 0, 335);  break;} // D
+    case 39:{ pca9685.setPWM(SER10, 0, 328);  break;} // D#
+    case 40:{ pca9685.setPWM(SER11, 0, 352);  break;} // E
+    case 41:{ pca9685.setPWM(SER12, 0, 335);  break;} // F
+    case 42:{ pca9685.setPWM(SER13, 0, 342);  break;} // F#          
   }
 }
 
 void setup() {
-
   // Serial monitor setup
   Serial.begin(115200);
 
@@ -164,7 +162,6 @@ void setup() {
   MIDI.setHandleNoteOn(noteOn);
   MIDI.setHandleNoteOff(noteOff); 
   //MIDI.setHandleControlChange(controlchange);
-  
 }
 
 void loop(){
