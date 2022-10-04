@@ -39,37 +39,39 @@ void controlchange(byte channel, byte number, byte value){
 void setupServoMap() {
   // Fill the servoMap with hardware indices and calibrated PWM values
 
-  //Board 1
-  servoMap.insert(std::make_pair(17, (servoCalibration){.controllerIndex=1, .servoIndex= 0, .onPWM=295, .offPWM=369})); // F0 --
-  servoMap.insert(std::make_pair(18, (servoCalibration){.controllerIndex=1, .servoIndex= 1, .onPWM=275, .offPWM=369})); // F#
-  servoMap.insert(std::make_pair(19, (servoCalibration){.controllerIndex=1, .servoIndex= 2, .onPWM=340, .offPWM=250})); // G
-  servoMap.insert(std::make_pair(20, (servoCalibration){.controllerIndex=1, .servoIndex= 3, .onPWM=369, .offPWM=295})); // G#
-  servoMap.insert(std::make_pair(21, (servoCalibration){.controllerIndex=1, .servoIndex= 4, .onPWM=369, .offPWM=250})); // A
-  servoMap.insert(std::make_pair(22, (servoCalibration){.controllerIndex=1, .servoIndex= 5, .onPWM=369, .offPWM=295})); // A#
-  servoMap.insert(std::make_pair(23, (servoCalibration){.controllerIndex=1, .servoIndex= 6, .onPWM=369, .offPWM=250})); // B
-  servoMap.insert(std::make_pair(24, (servoCalibration){.controllerIndex=1, .servoIndex= 7, .onPWM=369, .offPWM=250})); // C1 --
+  servoMap = std::map<int, servoCalibration> {
+    //Board 1
+    {17, {.controllerIndex=1, .servoIndex= 0, .onPWM=295, .offPWM=369}}, // F0 --
+    {18, {.controllerIndex=1, .servoIndex= 1, .onPWM=275, .offPWM=369}}, // F#
+    {19, {.controllerIndex=1, .servoIndex= 2, .onPWM=340, .offPWM=250}}, // G
+    {20, {.controllerIndex=1, .servoIndex= 3, .onPWM=369, .offPWM=295}}, // G#
+    {21, {.controllerIndex=1, .servoIndex= 4, .onPWM=369, .offPWM=250}}, // A
+    {22, {.controllerIndex=1, .servoIndex= 5, .onPWM=369, .offPWM=295}}, // A#
+    {23, {.controllerIndex=1, .servoIndex= 6, .onPWM=369, .offPWM=250}}, // B
+    {24, {.controllerIndex=1, .servoIndex= 7, .onPWM=369, .offPWM=250}}, // C1 --
 
-  servoMap.insert(std::make_pair(25, (servoCalibration){.controllerIndex=1, .servoIndex= 8, .onPWM=369, .offPWM=250})); // C#
-  servoMap.insert(std::make_pair(26, (servoCalibration){.controllerIndex=1, .servoIndex= 9, .onPWM=369, .offPWM=250})); // D
-  servoMap.insert(std::make_pair(27, (servoCalibration){.controllerIndex=1, .servoIndex=10, .onPWM=369, .offPWM=295})); // D#
-  servoMap.insert(std::make_pair(28, (servoCalibration){.controllerIndex=1, .servoIndex=11, .onPWM=369, .offPWM=250})); // E
+    {25, {.controllerIndex=1, .servoIndex= 8, .onPWM=369, .offPWM=250}}, // C#
+    {26, {.controllerIndex=1, .servoIndex= 9, .onPWM=369, .offPWM=250}}, // D
+    {27, {.controllerIndex=1, .servoIndex=10, .onPWM=369, .offPWM=295}}, // D#
+    {28, {.controllerIndex=1, .servoIndex=11, .onPWM=369, .offPWM=250}}, // E
 
-  //Board 0
-  servoMap.insert(std::make_pair(29, (servoCalibration){.controllerIndex=0, .servoIndex= 0, .onPWM=369, .offPWM=295})); // F
-  servoMap.insert(std::make_pair(30, (servoCalibration){.controllerIndex=0, .servoIndex= 1, .onPWM=328, .offPWM=275})); // F#
-  servoMap.insert(std::make_pair(31, (servoCalibration){.controllerIndex=0, .servoIndex= 2, .onPWM=348, .offPWM=285})); // G
-  servoMap.insert(std::make_pair(32, (servoCalibration){.controllerIndex=0, .servoIndex= 3, .onPWM=301, .offPWM=241})); // G#
-  servoMap.insert(std::make_pair(33, (servoCalibration){.controllerIndex=0, .servoIndex= 4, .onPWM=358, .offPWM=288})); // A
-  servoMap.insert(std::make_pair(34, (servoCalibration){.controllerIndex=0, .servoIndex= 5, .onPWM=318, .offPWM=248})); // A#
+    //Board 0
+    {29, {.controllerIndex=0, .servoIndex= 0, .onPWM=369, .offPWM=295}}, // F
+    {30, {.controllerIndex=0, .servoIndex= 1, .onPWM=328, .offPWM=275}}, // F#
+    {31, {.controllerIndex=0, .servoIndex= 2, .onPWM=348, .offPWM=285}}, // G
+    {32, {.controllerIndex=0, .servoIndex= 3, .onPWM=301, .offPWM=241}}, // G#
+    {33, {.controllerIndex=0, .servoIndex= 4, .onPWM=358, .offPWM=288}}, // A
+    {34, {.controllerIndex=0, .servoIndex= 5, .onPWM=318, .offPWM=248}}, // A#
 
-  servoMap.insert(std::make_pair(35, (servoCalibration){.controllerIndex=0, .servoIndex= 6, .onPWM=280, .offPWM=372})); // B
-  servoMap.insert(std::make_pair(36, (servoCalibration){.controllerIndex=0, .servoIndex= 7, .onPWM=281, .offPWM=358})); // C2 --
-  servoMap.insert(std::make_pair(37, (servoCalibration){.controllerIndex=0, .servoIndex= 8, .onPWM=300, .offPWM=385})); // C#
-  servoMap.insert(std::make_pair(38, (servoCalibration){.controllerIndex=0, .servoIndex= 9, .onPWM=250, .offPWM=335})); // D
-  servoMap.insert(std::make_pair(39, (servoCalibration){.controllerIndex=0, .servoIndex=10, .onPWM=285, .offPWM=328})); // D#
-  servoMap.insert(std::make_pair(40, (servoCalibration){.controllerIndex=0, .servoIndex=11, .onPWM=281, .offPWM=352})); // E
-  servoMap.insert(std::make_pair(41, (servoCalibration){.controllerIndex=0, .servoIndex=12, .onPWM=288, .offPWM=335})); // F
-  servoMap.insert(std::make_pair(42, (servoCalibration){.controllerIndex=0, .servoIndex=13, .onPWM=301, .offPWM=342})); // F#
+    {35, {.controllerIndex=0, .servoIndex= 6, .onPWM=280, .offPWM=372}}, // B
+    {36, {.controllerIndex=0, .servoIndex= 7, .onPWM=281, .offPWM=358}}, // C2 --
+    {37, {.controllerIndex=0, .servoIndex= 8, .onPWM=300, .offPWM=385}}, // C#
+    {38, {.controllerIndex=0, .servoIndex= 9, .onPWM=250, .offPWM=335}}, // D
+    {39, {.controllerIndex=0, .servoIndex=10, .onPWM=285, .offPWM=328}}, // D#
+    {40, {.controllerIndex=0, .servoIndex=11, .onPWM=281, .offPWM=352}}, // E
+    {41, {.controllerIndex=0, .servoIndex=12, .onPWM=288, .offPWM=335}}, // F
+    {42, {.controllerIndex=0, .servoIndex=13, .onPWM=301, .offPWM=342}}  // F#
+  };
 }
 
 void noteOn(byte channel, byte pitch, byte velocity){
