@@ -6,7 +6,7 @@
  * Choose the ESP32 Dev Module in the board manager
  * Necesery libraries:
  * - MIDI Library by Francois Best
- * - 
+ * - Adafruit PWM Servo Driver Library by Adafruit
  */
 
 //https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json, http://arduino.esp8266.com/stable/package_esp8266com_index.json
