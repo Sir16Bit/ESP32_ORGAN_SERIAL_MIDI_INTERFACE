@@ -25,8 +25,8 @@ struct servoCalibration {
   int servoIndex;
   int onPWM;
   int offPWM;
-}
-std::map<int, struct servoCalibration> servoMap;
+};
+std::map<int, servoCalibration> servoMap;
 
 /* Calibration function
 void controlchange(byte channel, byte number, byte value){
@@ -75,18 +75,22 @@ void setupServoMap() {
 void noteOn(byte channel, byte pitch, byte velocity){
   Serial.println(pitch);
 
-  servoData = servoMap.find(pitch);
+  auto servoData = servoMap.find(pitch);
   if(servoData != servoMap.end()) {
-    servoControllers[servoData.controllerIndex].setPWM(servoData.servoIndex, 0, servoData.onPWM);
+    servoControllers[servoData->second.controllerIndex].setPWM(
+      servoData->second.servoIndex, 0, servoData->second.onPWM
+    );
   } else {
-    Serial.println("Unmapped MIDI key!")
+    Serial.println("Unmapped MIDI key!");
   }
 }
 
 void noteOff(byte channel, byte pitch, byte velocity){
-  servoData = servoMap.find(pitch);
+  auto servoData = servoMap.find(pitch);
   if(servoData != servoMap.end()) {
-    servoControllers[servoData.controllerIndex].setPWM(servoData.servoIndex, 0, servoData.onPWM);
+    servoControllers[servoData->second.controllerIndex].setPWM(
+      servoData->second.servoIndex, 0, servoData->second.onPWM
+    );
   }
 }
 
