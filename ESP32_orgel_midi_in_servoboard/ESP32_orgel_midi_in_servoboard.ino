@@ -103,21 +103,20 @@ void setup() {
   // Print to monitor
   Serial.println("PCA9685 Servo Test");
 
-  // Initialize PCA9685
+  // Initialize PCA9685 controllers
+  servoControllers = std::vector<Adafruit_PWMServoDriver> {
+    Adafruit_PWMServoDriver(0x40),
+    Adafruit_PWMServoDriver(0x41)
+  };
 
-  Adafruit_PWMServoDriver pca9685 = Adafruit_PWMServoDriver(0x40);
-  pca9685.begin();
-  pca9685.setPWMFreq(50);
-  servoControllers.push_back(pca9685);
-  Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41);
-  pca9686.begin();
-  pca9686.setPWMFreq(50);
-  servoControllers.push_back(pca9686);
-
-  // Set PWM Frequency to 50Hz
+  for(auto controller : servoControllers) {
+    controller.setPWMFreq(50);
+    controller.begin();
+  }
 
   pinMode (2, OUTPUT);
   MIDI.begin(MIDI_CHANNEL_OMNI); 
+
   digitalWrite(2, HIGH);
   delay(200);
   digitalWrite(2, LOW);
