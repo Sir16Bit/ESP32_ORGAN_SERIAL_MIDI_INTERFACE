@@ -91,7 +91,7 @@ void noteOff(byte channel, byte pitch, byte velocity){
   auto servoData = servoMap.find(pitch);
   if(servoData != servoMap.end()) {
     servoControllers[servoData->second.controllerIndex].setPWM(
-      servoData->second.servoIndex, 0, servoData->second.onPWM
+      servoData->second.servoIndex, 0, servoData->second.offPWM
     );
   }
 }
