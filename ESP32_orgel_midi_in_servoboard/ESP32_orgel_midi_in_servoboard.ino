@@ -15,10 +15,10 @@
 #include <Adafruit_PWMServoDriver.h>
 
 //Add board
-Adafruit_PWMServoDriver pca9685 = Adafruit_PWMServoDriver(0x40);
-Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41);
-
-//cluster 1
+Adafruit_PWMServoDriver pca9685 = Adafruit_PWMServoDriver(0x40); //Board 0
+Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41); //Board 1
+Adafruit_PWMServoDriver pca9687 = Adafruit_PWMServoDriver(0x42); //Board 2
+//Board 0 (middle top row of keys)
 #define SER0  0   
 #define SER1  1  
 #define SER2  2  
@@ -34,8 +34,10 @@ Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41);
 #define SER11  11
 #define SER12  12 
 #define SER13  13
+#define SER14  14
+#define SER15  15
 
-//cluster 2
+//Board 1 (Left top row of keys)
 #define SER16  0
 #define SER17  1
 #define SER18  2
@@ -50,6 +52,36 @@ Adafruit_PWMServoDriver pca9686 = Adafruit_PWMServoDriver(0x41);
 #define SER26  10
 #define SER27  11
 
+#define SER28  12
+#define SER29  13
+
+
+#define SER32  0
+#define SER33  1
+#define SER34  2
+#define SER35  3
+#define SER36  4
+#define SER37  5
+#define SER38  6
+#define SER39  7
+
+#define SER40  8
+#define SER41  9
+#define SER42  10
+#define SER43  11
+
+#define SER44  12
+#define SER45  13
+#define SER46  14
+#define SER47  15
+
+
+
+
+//cluster 3
+
+
+
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI);
 
 /* Calibration function
@@ -63,6 +95,7 @@ void controlchange(byte channel, byte number, byte value){
 void noteOn(byte channel, byte pitch, byte velocity){
   Serial.println(pitch);
   switch(pitch){   
+    
     //Board 1
     case 17:{pca9686.setPWM(SER16, 0, 295); break;} // F0
     case 18:{pca9686.setPWM(SER17, 0, 275); break;} // F# 
@@ -94,6 +127,25 @@ void noteOn(byte channel, byte pitch, byte velocity){
     case 40:{ pca9685.setPWM(SER11, 0, 281);  break;}
     case 41:{ pca9685.setPWM(SER12, 0, 288);  break;}
     case 42:{ pca9685.setPWM(SER13, 0, 301);  break;}
+
+    
+    case 43:{ pca9685.setPWM(SER14, 0,300);  break;} //lower value is higher position
+    case 44:{ pca9685.setPWM(SER15, 0, 300);  break;}
+
+    //Board 2
+
+
+     
+    case 45:{ pca9687.setPWM(SER32, 0,300);  break;}
+    case 46:{ pca9687.setPWM(SER33, 0, 300);  break;}
+    case 47:{ pca9687.setPWM(SER34, 0,350);  break;}
+    case 48:{ pca9687.setPWM(SER35, 0,350);  break;}
+    //case 49:{ pca9687.setPWM(SER36, 0,400);  break;}
+    case 50:{ pca9687.setPWM(SER37, 0, 380);  break;}
+   // case 51:{ pca9687.setPWM(SER38, 0,369);  break;}
+  //  case 52:{ pca9687.setPWM(SER39, 0, 328);  break;}
+
+    
   }
 }
 
@@ -129,7 +181,23 @@ void noteOff(byte channel, byte pitch, byte velocity){
     case 39:{ pca9685.setPWM(SER10, 0, 328);  break;} // D#
     case 40:{ pca9685.setPWM(SER11, 0, 352);  break;} // E
     case 41:{ pca9685.setPWM(SER12, 0, 335);  break;} // F
-    case 42:{ pca9685.setPWM(SER13, 0, 342);  break;} // F#          
+    case 42:{ pca9685.setPWM(SER13, 0, 342);  break;} // F#        
+
+          
+    case 43:{ pca9685.setPWM(SER14, 0,200);  break;} //lower value = higher position  
+    case 44:{ pca9685.setPWM(SER15, 0, 200);  break;}
+
+        //Board 2
+
+
+    case 45:{ pca9687.setPWM(SER32, 0,200);  break;}
+    case 46:{ pca9687.setPWM(SER33, 0, 200);  break;}
+    case 47:{ pca9687.setPWM(SER34, 0,200);  break;}
+    case 48:{ pca9687.setPWM(SER35, 0, 200);  break;}
+   //case 49:{ pca9687.setPWM(SER36, 0,400);  break;}
+   case 50:{ pca9687.setPWM(SER37, 0, 250);  break;}
+   // case 51:{ pca9687.setPWM(SER38, 0,295);  break;}
+  //  case 52:{ pca9687.setPWM(SER39, 0, 275);  break;}
   }
 }
 
@@ -143,20 +211,24 @@ void setup() {
   // Initialize PCA9685
   pca9685.begin();
   pca9686.begin();
-
+  pca9687.begin();
   // Set PWM Frequency to 50Hz
   pca9685.setPWMFreq(50);
   pca9686.setPWMFreq(50);
-
-  pinMode (2, OUTPUT);
+  pca9687.setPWMFreq(50);
+  pinMode (13, OUTPUT);
   MIDI.begin(MIDI_CHANNEL_OMNI); 
-  digitalWrite(2, HIGH);
+  digitalWrite(13, HIGH);
   delay(200);
-  digitalWrite(2, LOW);
+  digitalWrite(13, LOW);
   delay(200);
-  digitalWrite(2, HIGH);
+  digitalWrite(13, HIGH);
   delay(200);
-  digitalWrite(2, LOW);
+  digitalWrite(13, LOW);
+  delay(200);
+    digitalWrite(13, HIGH);
+  delay(200);
+  digitalWrite(13, LOW);
   delay(200);
    
   MIDI.setHandleNoteOn(noteOn);
