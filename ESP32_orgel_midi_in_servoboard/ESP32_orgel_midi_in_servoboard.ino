@@ -138,12 +138,12 @@ void noteOn(byte channel, byte pitch, byte velocity){
     case 64:{ pca9685_2.setPWM(SER39, 0, 300);  break;}
     case 65:{ pca9685_2.setPWM(SER40, 0,350);  break;}
     case 66:{ pca9685_2.setPWM(SER41, 0,350);  break;}
-    case 67:{ pca9685_2.setPWM(SER42, 0,300);  break;}
-    case 68:{ pca9685_2.setPWM(SER43, 0, 300);  break;}
+    case 67:{ pca9685_2.setPWM(SER42, 0,330);  break;} //upper g
+    case 68:{ pca9685_2.setPWM(SER43, 0, 350);  break;}
     case 69:{ pca9685_2.setPWM(SER44, 0,350);  break;}
     case 70:{ pca9685_2.setPWM(SER45, 0,350);  break;}
-    case 71:{ pca9685_2.setPWM(SER46, 0,350);  break;}
-    case 72:{ pca9685_2.setPWM(SER47, 0,350);  break;}
+    case 71:{ pca9685_2.setPWM(SER46, 0,330);  break;}
+    case 72:{ pca9685_2.setPWM(SER47, 0,320);  break;}
 
 
 
@@ -211,8 +211,8 @@ void noteOff(byte channel, byte pitch, byte velocity){
     case 68:{ pca9685_2.setPWM(SER43, 0, 200);  break;}
     case 69:{ pca9685_2.setPWM(SER44, 0,200);  break;}
     case 70:{ pca9685_2.setPWM(SER45, 0,200);  break;}
-    case 71:{ pca9685_2.setPWM(SER46, 0,200);  break;}
-    case 72:{ pca9685_2.setPWM(SER47, 0,200);  break;}
+    case 71:{ pca9685_2.setPWM(SER46, 0,370);  break;}
+    case 72:{ pca9685_2.setPWM(SER47, 0,420);  break;}
 
 
   }
