@@ -87,6 +87,8 @@ void controlchange(byte channel, byte number, byte value){
 
 void noteOn(byte channel, byte pitch, byte velocity){
   Serial.println(pitch);
+  pitch = pitch -12;
+  
   switch(pitch){   
     
     //Board 1
@@ -113,10 +115,10 @@ void noteOn(byte channel, byte pitch, byte velocity){
     case 45:{ pca9685_0.setPWM(SER4, 0, 358);  break;}
     case 46:{ pca9685_0.setPWM(SER5, 0, 318);  break;}
 
-    case 47:{ pca9685_0.setPWM(SER6, 0, 280);  break;} // B1
+    case 47:{ pca9685_0.setPWM(SER6, 0, 300);  break;} // B1
     case 48:{ pca9685_0.setPWM(SER7, 0, 281);  break;} // C1
     case 49:{ pca9685_0.setPWM(SER8, 0, 300);  break;} // C#
-    case 50:{ pca9685_0.setPWM(SER9, 0, 250);  break;} // D
+    case 50:{ pca9685_0.setPWM(SER9, 0, 260);  break;} // D ///test
     case 51:{ pca9685_0.setPWM(SER10, 0, 285);  break;}
     case 52:{ pca9685_0.setPWM(SER11, 0, 281);  break;}
     case 53:{ pca9685_0.setPWM(SER12, 0, 288);  break;}
@@ -158,6 +160,9 @@ void noteOn(byte channel, byte pitch, byte velocity){
 }
 
 void noteOff(byte channel, byte pitch, byte velocity){
+  
+  pitch = pitch -12;
+  
   switch(pitch){
     //Board 1
     case 29:{pca9685_1.setPWM(SER16, 0, 369); break;} // F0 --
@@ -183,7 +188,7 @@ void noteOff(byte channel, byte pitch, byte velocity){
     case 45:{ pca9685_0.setPWM(SER4, 0, 288);  break;} // A
     case 46:{ pca9685_0.setPWM(SER5, 0, 248);  break;} // A#
 
-    case 47:{ pca9685_0.setPWM(SER6, 0, 372);  break;} // B
+    case 47:{ pca9685_0.setPWM(SER6, 0, 372);  break;} // B    //testing
     case 48:{ pca9685_0.setPWM(SER7, 0, 358);  break;} // C2 --
     case 49:{ pca9685_0.setPWM(SER8, 0, 385);  break;} // C#
     case 50:{ pca9685_0.setPWM(SER9, 0, 335);  break;} // D
